@@ -1,9 +1,9 @@
-export type MapType = {
+interface MapType {
   name: string;
-  site: number;
+  sites: number;
 }
 
-export const maps = [
+export const maps: MapType[] = [
   {
     name: "split",
     sites: 2

@@ -1,4 +1,4 @@
-export type AgentType = {
+interface AgentType {
   name: string;
   role: string;
   skills: {};

@@ -5,8 +5,8 @@ import { Button, Grid, MenuItem, Select, Typography } from "@material-ui/core";
 const Filters = () => {
   const [theMap, setTheMap] = useState("");
   
-  const handleMapChange = (e: ChangeEvent<{ value: unknown }>) => {
-    setTheMap(e.target.value as string);
+  const handleMapChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setTheMap(event.target.value);
   }
 
   const clearFilters = () => {
@@ -21,7 +21,7 @@ const Filters = () => {
       </Grid>
       <Grid item xs={8}>
         <Typography variant="subtitle2">Map</Typography>
-        <Select id="mapFilter" onChange={handleMapChange} value={theMap}>
+        <Select native id="mapFilter" onChange={handleMapChange} value={theMap}>
           {maps.map((map, i) => (
             <MenuItem key={i} value={map.name}>
               {map.name.toUpperCase()}
