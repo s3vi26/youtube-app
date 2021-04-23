@@ -1,7 +1,16 @@
+export type Agent = {
+  agents: AgentType[];
+}
+interface SkillType {
+  C: string;
+  Q: string;
+  E: string;
+  Ultimate: string;
+}
 interface AgentType {
   name: string;
   role: string;
-  skills: {};
+  skills: SkillType;
 }
 
 export const agents: AgentType[] = [

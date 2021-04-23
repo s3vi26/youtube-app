@@ -2,13 +2,10 @@ import React, { ChangeEvent, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Avatar from '@material-ui/core/Avatar';
-import { Button, Grid } from '@material-ui/core';
-import Radio from '@material-ui/core/Radio';
+import { Grid, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import Filters from './Filters';
-
-type AgentCardProps = {
-  agents: { name: string; role: string;}[];
-}
+import SkillCard from './skillCard';
+import { Agent } from '../Data/agents';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,14 +32,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function AgentCard({ agents }: AgentCardProps ): any {
+export default function AgentCard({ agents }: Agent ): any {
   const classes = useStyles();
   const [selectedAgent, setSelectedAgent] = useState<string>('');
+  const [skill, setSkill] = useState<string>('');
 
   const agentSelect = (event: ChangeEvent<HTMLInputElement>) => {
+    setSkill('');
     setSelectedAgent(event.target.value);
+  }
+  const skillChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSkill(event.target.value);
     console.log(event.target.value);
-    // The button has the value aka name of agent. Getting the value wont work with e.target.value?
   }
   return (
     <div>
@@ -54,6 +55,18 @@ export default function AgentCard({ agents }: AgentCardProps ): any {
           return <Radio key={i} value={agent.name} color="primary" onChange={agentSelect} checked={selectedAgent === agent.name} icon={<Avatar alt={agent.name} variant="square" src={`./icons/${agent.name}.png`} className={classes.large} />} checkedIcon={<Avatar alt={agent.name} variant="square" src={`./icons/${agent.name}.png`} className={classes.selected} />} />
         })}
       </>
+      </Grid>
+      <Grid item xs={12} className={classes.item}>
+        {selectedAgent && agents.filter(agent => agent.name === selectedAgent).map((filtered, i) => {
+            const keys = Object.keys(filtered.skills);
+            const names = Object.values(filtered.skills);
+          return <RadioGroup key={i} value={skill} onChange={skillChange}>
+          <FormControlLabel value={keys[0]} control={<Radio />} label={names[0]} />
+          <FormControlLabel value={keys[1]} control={<Radio />} label={names[1]} />
+          <FormControlLabel value={keys[2]} control={<Radio />} label={names[2]} />
+          <FormControlLabel value={keys[3]} control={<Radio />} label={names[3]} />
+        </RadioGroup>
+        })}
       </Grid>
       </Grid>
     </div>
