@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -30,9 +30,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AgentCard({ agents }: AgentCardProps ): any {
   const classes = useStyles();
+  const [selectedAgent, setSelectedAgent] = useState<string>('');
 
   const agentSelect = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log(event)
+    console.log(event);
+    // The button has the value aka name of agent. Getting the value wont work with e.target.value?
   }
   return (
     <div>
