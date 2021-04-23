@@ -21,7 +21,7 @@ const Filters = () => {
       </Grid>
       <Grid item xs={8}>
         <Typography variant="subtitle2">Map</Typography>
-        <Select id="mapFilter" onChange={handleMapChange} value={theMap}>
+        <Select id="mapFilter" value={theMap}>
           {maps.map((map, i) => (
             <MenuItem key={i} value={map.name}>
               {map.name.toUpperCase()}
